@@ -40,8 +40,8 @@ public class ScrollingActivity extends AppCompatActivity {
         {
             do {
                 String email = allRows.getString(0);
-                String FNAME = allRows.getString(1);
-                Toast.makeText(getApplicationContext(),email+""+FNAME, Toast.LENGTH_SHORT).show();
+                String fName = allRows.getString(1);
+                Toast.makeText(getApplicationContext(),email+""+fName, Toast.LENGTH_SHORT).show();
             }while(allRows.moveToNext());
         }
         db.close();

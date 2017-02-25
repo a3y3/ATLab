@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.student.invoiceman.MainActivity"
+    tools:showIn="@layout/activity_main"
+    android:id="@+id/scroll_view_top">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp">
+        <TextView
+            android:text="Welcome."
+            android:textSize="32sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/top_introduction_text"
+            android:layout_centerHorizontal="true"
+            />
+
+        <TextView
+            android:id="@+id/product_name"
+            android:layout_below="@id/top_introduction_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Product Name:"
+            android:textSize="16sp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="40dp"/>
+
+        <EditText
+            android:id="@+id/edit_text_1"
+            android:layout_width="match_parent"
+            android:paddingRight="8dp"
+            android:paddingLeft="8dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginStart="15dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/product_name"
+            android:layout_alignBottom="@+id/product_name"
+            android:layout_toEndOf="@+id/product_name" />
+
+        <TextView
+            android:id="@+id/product_region"
+            android:layout_below="@id/product_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Region:"
+            android:textSize="16sp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="40dp"
+            android:layout_alignEnd="@id/product_name"/>
+
+        <EditText
+            android:id="@+id/edit_text_2"
+            android:layout_width="match_parent"
+            android:paddingRight="8dp"
+            android:paddingLeft="8dp"
+            android:layout_below="@id/product_region"
+            android:layout_alignBaseline="@+id/product_region"
+            android:layout_marginEnd="24dp"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/edit_text_1" />
+
+        <TextView
+            android:id="@+id/product_is_available"
+            android:layout_below="@id/product_region"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Availability:"
+            android:textSize="16sp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="40dp"
+            android:layout_alignEnd="@id/product_name"/>
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/radio_group_available"
+            android:layout_toEndOf="@id/product_is_available"
+            android:layout_below="@id/edit_text_2"
+            android:layout_alignParentEnd="true"
+            android:layout_alignBaseline="@id/product_is_available"
+            android:layout_alignParentTop="true">
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Available"
+                android:id="@+id/is_available_no"/>
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Not available"
+                android:id="@+id/is_available_yes" />
+        </RadioGroup>
+
+
+    </RelativeLayout>
+
+
+
+</android.support.v4.widget.NestedScrollView>
