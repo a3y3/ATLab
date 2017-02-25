@@ -1,6 +1,7 @@
 package com.example.student.invoiceman;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -14,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     private String TABLE_PRODUCT = "PRODUCT";
@@ -44,8 +46,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         sqLiteDatabase= openOrCreateDatabase(DB_NAME, Context.MODE_PRIVATE, null);
         //sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS DOGGIE(NAME VARCHAR)");
-        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_PRODUCT + "(PRODUCT_ID INT PRIMARY KEY, PRODUCT_NAME VARCHAR, REGION VARCHAR, IS_AVAILABLE VARCHAR)");
-        //sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_PRICE + "PRODUCT_ID INT, PRICE INT");
+        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_PRODUCT + "(PRODUCT_ID INT PRIMARY KEY AUTOINCREMENT, PRODUCT_NAME VARCHAR, REGION VARCHAR, IS_AVAILABLE VARCHAR)");
+        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_PRICE + "(PRODUCT_ID INT PRIMARY KEY AUTOINCREMENT, PRICE INT)");
         /*sqLiteDatabase.execSQL("INSERT INTO " + TABLE_PRODUCT + "VALUES 12, Toothbrush, Nashik, yes");
         sqLiteDatabase.execSQL("INSERT INTO " + TABLE_PRODUCT + "VALUES 13, Fiber Optic Cable, India, no");
         sqLiteDatabase.execSQL("INSERT INTO " + TABLE_PRODUCT + "VALUES 14, Gaming Mouse, USA, yes");
@@ -84,9 +86,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         else
             flag = 0;
         productPrice = (EditText)findViewById(R.id.edit_text_3);
+        String isAvailable;
+        if(flag == 1)
+        {
+            isAvailable = "Yes";
+        }
+        else
+            isAvailable = "No";
+       // sqLiteDatabase.execSQL("INSERT INTO "+TABLE_PRODUCT+"(PRODUCT_NAME,REGION,IS_AVAILABLE) VALUES('"+productPrice+"','"+productRegion+"','"+isAvailable+"')");
 
-        //sqLiteDatabase.execSQL("INSERT INTO "+TABLE_PRODUCT+"VALUES('");
-
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM "+TABLE_PRODUCT+" NATURAL JOIN "+TABLE_PRICE,null);
+        Toast.makeText(getApplicationContext(),cursor.getCount(), Toast.LENGTH_SHORT).show();
     }
 
     @Override
