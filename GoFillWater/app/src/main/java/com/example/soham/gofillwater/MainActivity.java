@@ -63,15 +63,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         {
             Log.e("test","File error, damn");
         }
-
-       FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
     }
 
     @Override
@@ -82,6 +73,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String password1 = password1EditText.getText().toString();
         String password2 = password2EditText.getText().toString();
         if(password1.equals("apple") && password2.equals("banana")) {
+            password1EditText.setText("");
+            password2EditText.setText("");
 
             try {
                 FileInputStream fileInputStream = openFileInput("name");
@@ -101,8 +94,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     currentName = "Soham";
                 }
                 Log.e("Test", "Text read was" + value);
-                //fileOutputStream.flush();
-
                 fileInputStream.close();
             } catch (Exception e) {
                 Log.e("test", "The error is" + e.toString());
