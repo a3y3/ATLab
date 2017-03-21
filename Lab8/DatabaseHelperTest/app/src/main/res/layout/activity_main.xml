@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.soham.databasehelpertest.MainActivity"
+    tools:showIn="@layout/activity_main"
+    android:id="@+id/scroll_view_top">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp">
+        <TextView
+            android:text="@string/welcome"
+            android:textSize="32sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/top_introduction_text"
+            android:layout_centerHorizontal="true"
+            />
+
+        <TextView
+            android:id="@+id/product_name"
+            android:layout_below="@id/top_introduction_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/product_name"
+            android:textSize="16sp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="40dp"
+            android:maxLines="1"/>
+
+        <EditText
+            android:id="@+id/edit_text_1"
+            android:inputType="textCapSentences|textAutoCorrect"
+            android:imeOptions="actionNext"
+            android:layout_width="match_parent"
+            android:paddingRight="8dp"
+            android:paddingLeft="8dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginStart="15dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/product_name"
+            android:layout_alignBottom="@+id/product_name"
+            android:layout_toEndOf="@+id/product_name" />
+
+        <TextView
+            android:id="@+id/product_region"
+            android:layout_below="@id/product_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/phone_no"
+            android:textSize="16sp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="40dp"
+            android:layout_alignEnd="@id/product_name"/>
+
+        <EditText
+            android:id="@+id/edit_text_2"
+            android:imeOptions="actionNext"
+            android:maxLines="1"
+            android:layout_width="match_parent"
+            android:paddingRight="8dp"
+            android:paddingLeft="8dp"
+            android:layout_below="@id/product_region"
+            android:layout_alignBaseline="@+id/product_region"
+            android:layout_marginEnd="24dp"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/edit_text_1" />
+
+
+
+        <Button
+            android:text="@string/update_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/update_button"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_alignParentBottom="true"
+            android:maxLines="1"
+            android:layout_toEndOf="@+id/delete_button" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/insert"
+            android:id="@+id/button_go"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_alignParentBottom="true"
+            android:layout_toStartOf="@+id/delete_button" />
+
+        <Button
+            android:text="@string/delete"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/delete_button"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_below="@+id/edit_text_2"
+            android:layout_centerHorizontal="true" />
+
+
+    </RelativeLayout>
+
+
+
+</android.support.v4.widget.NestedScrollView>

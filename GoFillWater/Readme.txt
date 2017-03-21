@@ -1,0 +1,1 @@
+A simple app to decide who should go fill the water bottle, me or my roommate, that stores the current name on a file and toggles it when 2 passwords are entered correctly.

@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Database Helper Test</string>
+    <string name="phone_no">Phone No.:</string>
+    <string name="update_name">Update Name</string>
+    <string name="insert">Insert</string>
+    <string name="delete">Delete</string>
+    <string name="welcome">Welcome.</string>
+    <string name="product_name">Product Name:</string>
+</resources>
