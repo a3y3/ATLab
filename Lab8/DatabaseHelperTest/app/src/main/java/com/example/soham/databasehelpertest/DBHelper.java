@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,7 +39,7 @@ public class DBHelper extends SQLiteOpenHelper {
         onCreate(sqLiteDatabase);
     }
 
-    public void addContact(Contact contact)
+    public void addContact(Contact contact, Context context)
     {
         Log.e("007","name is"+contact.get_name());
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
@@ -46,6 +48,17 @@ public class DBHelper extends SQLiteOpenHelper {
         contentValues.put(KEY_PHONE, contact.get_phone_number());
 
         sqLiteDatabase.insert(TABLE_NAME,null,contentValues);
+
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM "+TABLE_NAME,null);
+        Toast.makeText(context,cursor.getCount()+" items", Toast.LENGTH_SHORT).show();
+        if(cursor.moveToFirst())
+        {
+            do {
+                String name = cursor.getString(1);
+                String region = cursor.getString(2);
+                Toast.makeText(context,name+" "+region, Toast.LENGTH_SHORT).show();
+            }while(cursor.moveToNext());
+        }
     }
 
     public Contact getContact(int id){
@@ -61,22 +74,49 @@ public class DBHelper extends SQLiteOpenHelper {
         return contact;
     }
 
-    public int updateContact(Contact contact){
+    public int updateContact(Contact contact, Context context){
 
-        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        /*SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
         contentValues.put(KEY_NAME, contact.get_name());
         contentValues.put(KEY_PHONE, contact.get_phone_number());
 
-        return  sqLiteDatabase.update(TABLE_NAME, contentValues, KEY_ID+" = ?", new String[]{String.valueOf(contact.get_id())} );
+        return  sqLiteDatabase.update(TABLE_NAME, contentValues, KEY_ID+" = ?", new String[]{String.valueOf(contact.get_id())} );*/
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        sqLiteDatabase.execSQL("UPDATE "+TABLE_NAME+" SET phone_number='"+contact.get_phone_number()+"' WHERE name='"+contact.get_name()+"'");
+
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM "+TABLE_NAME,null);
+        Toast.makeText(context,cursor.getCount()+" items", Toast.LENGTH_SHORT).show();
+        if(cursor.moveToFirst())
+        {
+            do {
+                String name = cursor.getString(1);
+                String region = cursor.getString(2);
+                Toast.makeText(context,name+" "+region, Toast.LENGTH_SHORT).show();
+            }while(cursor.moveToNext());
+        }
+
+        return 1;
+
+
     }
 
-    public void deleteContact(Contact contact) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TABLE_NAME, KEY_ID + " = ?",
-                new String[] { String.valueOf(contact.get_id()) });
-        db.close();
+    public void deleteContact(Contact contact, Context context) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        sqLiteDatabase.execSQL("DELETE FROM "+TABLE_NAME+" name="+contact.get_name());
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM "+TABLE_NAME,null);
+        Toast.makeText(context,cursor.getCount()+" items", Toast.LENGTH_SHORT).show();
+        if(cursor.moveToFirst())
+        {
+            do {
+                String name = cursor.getString(1);
+                String region = cursor.getString(2);
+                Toast.makeText(context,name+" "+region, Toast.LENGTH_SHORT).show();
+            }while(cursor.moveToNext());
+        }
+
+        sqLiteDatabase.close();
     }
 
     public List<Contact> getAllContacts() {

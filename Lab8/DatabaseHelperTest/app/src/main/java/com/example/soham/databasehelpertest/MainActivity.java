@@ -1,11 +1,10 @@
 package com.example.soham.databasehelpertest;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -41,18 +40,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.button_go:
                 DBHelper dbHelper = new DBHelper(this);
                 Contact contact = new Contact(name,phone);
-                dbHelper.addContact(contact);
+                dbHelper.addContact(contact, getApplicationContext());
                 List<Contact> contactsList = dbHelper.getAllContacts();
-                Toast.makeText(this, ""+contactsList.size(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, ""+contactsList.size(), Toast.LENGTH_SHORT).show();
                 break;
             case R.id.delete_button:
                 DBHelper dbHelper1 = new DBHelper(this);
-                Toast.makeText(this, "To DO!", Toast.LENGTH_SHORT).show();
+                Contact contact2 = new Contact(name,phone);
+                dbHelper1.deleteContact(contact2,getApplicationContext());
                 break;
             case R.id.update_button:
                 DBHelper dbHelper2 = new DBHelper(this);
                 Contact contact1 = new Contact(name, phone);
-                dbHelper2.updateContact(contact1);
+                dbHelper2.updateContact(contact1, getApplicationContext());
 
         }
     }
