@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,13 +24,16 @@ public class MainActivity extends AppCompatActivity {
     private TextView screenOffDectection;
     private BroadcastReceiver broadcastReceiver;
     private IntentFilter intentFilter;
-    private long startTime = 0L;
-    private Handler mHandler = new Handler();
-    private Runnable updateTimerThread;
 
+    private Handler handler;
+    private long startTime = 0L;
     private long timeInMilliseconds = 0L;
     private long timeSwapBuff = 0L;
-    long updatedTime = 0;
+    private long updatedTime = 0L;
+    private long timeInSeconds;
+    private long timeInMinutes;
+    private long timeInHours;
+    private Runnable updateTimerThread;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,17 +47,16 @@ public class MainActivity extends AppCompatActivity {
         intentFilter = new IntentFilter(Intent.ACTION_SCREEN_OFF);
         intentFilter.addAction(Intent.ACTION_SCREEN_OFF);
         registerReceiver(broadcastReceiver, intentFilter);
+
+        handler = new Handler();
+
         updateTimerThread = new Runnable() {
             @Override
             public void run() {
-                timeInMilliseconds = SystemClock.uptimeMillis() - startTime;
-                updatedTime = timeSwapBuff + timeInMilliseconds;
-
-                int seconds = (int)(updatedTime/1000);
-                int mins = (seconds/60);
-                int hours = (mins/60);
-                screenOffDectection.setText(hours+ "" + mins + ":"
-                                + String.format("%02d", seconds));
+                timeInMilliseconds = SystemClock.elapsedRealtime() - startTime;
+                timeInSeconds = timeInMilliseconds/1000;
+                screenOffDectection.setText(String.valueOf(timeInSeconds));
+                handler.postDelayed(this, 0);
             }
         };
 
@@ -72,8 +75,9 @@ public class MainActivity extends AppCompatActivity {
         super.onPause();
         if(MyScreenReciever.screenOff){
             Log.d("111","Screen off! Starting timer:");
-            startTime = SystemClock.uptimeMillis();
-            mHandler.postDelayed(updateTimerThread, 0);
+            startTime = SystemClock.elapsedRealtime();
+            Log.d("111","startTime is "+startTime);
+            handler.postDelayed(updateTimerThread, 0);
 
         }
     }
@@ -83,9 +87,9 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         if(!MyScreenReciever.screenOff){
             Log.d("111","Screen on! Stopping timer...");
-            timeSwapBuff += timeInMilliseconds;
-            mHandler.removeCallbacks(updateTimerThread);
         }
+        handler.removeCallbacks(updateTimerThread);
+        new 
     }
 
     @Override
