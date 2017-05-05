@@ -7,9 +7,11 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -57,6 +59,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             in = new BufferedReader(new InputStreamReader(fileInputStream));
             Log.e("Test","in.readLine in onCreate equals"+in.readLine());
             fileInputStream.close();
+            password1EditText = (EditText)findViewById(R.id.aneesh_password);
+            password2EditText = (EditText)findViewById(R.id.soham_password);
+            password2EditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+                @Override
+                public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                    boolean handled = false;
+                    if (actionId == EditorInfo.IME_ACTION_DONE) {
+                        handled = true;
+                        onClick(getWindow().getDecorView().getRootView());
+                    }
+                    return handled;
+                }
+            });
             goButton.setOnClickListener(this);
         }
         catch(Exception e)
@@ -68,11 +83,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view)
     {
-        password1EditText = (EditText)findViewById(R.id.aneesh_password);
-        password2EditText = (EditText)findViewById(R.id.soham_password);
         String password1 = password1EditText.getText().toString();
         String password2 = password2EditText.getText().toString();
-        if(password1.equals("apple") && password2.equals("banana")) {
+             //TODO set the password Rachit
             password1EditText.setText("");
             password2EditText.setText("");
 
