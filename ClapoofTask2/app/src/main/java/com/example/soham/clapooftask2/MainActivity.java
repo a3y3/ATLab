@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.os.SystemClock;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -21,7 +22,6 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView screenOffDectection;
     private BroadcastReceiver broadcastReceiver;
     private IntentFilter intentFilter;
 
@@ -42,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        screenOffDectection = (TextView)findViewById(R.id.screen_off_detection_text_view);
         broadcastReceiver = new MyScreenReciever();
         intentFilter = new IntentFilter(Intent.ACTION_SCREEN_OFF);
         intentFilter.addAction(Intent.ACTION_SCREEN_OFF);
@@ -55,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 timeInMilliseconds = SystemClock.elapsedRealtime() - startTime;
                 timeInSeconds = timeInMilliseconds/1000;
-                screenOffDectection.setText(String.valueOf(timeInSeconds));
                 handler.postDelayed(this, 0);
             }
         };
@@ -89,7 +87,10 @@ public class MainActivity extends AppCompatActivity {
             Log.d("111","Screen on! Stopping timer...");
         }
         handler.removeCallbacks(updateTimerThread);
-        new 
+        new AlertDialog.Builder(this)
+            .setTitle("Welcome back!")
+            .setMessage("You switched off your screen for "+ timeInHours+"H:"+timeInMinutes+"M:"+timeInSeconds+"S")
+            .show();
     }
 
     @Override

@@ -6,21 +6,4 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.soham.clapooftask2.MainActivity"
-    tools:showIn="@layout/activity_main">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        android:id="@+id/screen_off_detection_text_view"
-         />
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Push me"
-        android:id="@+id/button"
-        android:layout_below="@id/screen_off_detection_text_view"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="16dp"/>
-
-</RelativeLayout>
+    tools:showIn="@layout/activity_main"></RelativeLayout>
